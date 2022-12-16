@@ -5,3 +5,5 @@ typedef DoubleFunction = Function(double)?;
 typedef StringFunction = void Function(String?)?;
 
 typedef NetworkCallBack = void Function(NetworkResultEnums result);
+
+typedef JsonMap = Map<String, dynamic>;

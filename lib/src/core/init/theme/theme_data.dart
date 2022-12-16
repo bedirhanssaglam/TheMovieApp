@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app/app_constants.dart';
 import 'app_theme.dart';
-import 'i_text_theme.dart';
+import 'interface_theme.dart';
 
 class AppThemeDark extends AppTheme with ITheme {
   static AppThemeDark? _instance;
@@ -27,11 +27,8 @@ class AppThemeDark extends AppTheme with ITheme {
           bodyText2: textThemeDark!.bodyText2,
           subtitle1: textThemeDark!.subtitle1,
           subtitle2: textThemeDark!.subtitle2,
-          button: textThemeDark!.button,
         ),
         appBarTheme: ThemeData.light().appBarTheme.copyWith(
-            centerTitle: true,
-            titleTextStyle: TextStyle(color: AppConstants.instance.grey),
             color: AppConstants.instance.outerSpace,
             elevation: 3,
             iconTheme:
@@ -39,7 +36,6 @@ class AppThemeDark extends AppTheme with ITheme {
             systemOverlayStyle: SystemUiOverlayStyle.dark),
         inputDecorationTheme: InputDecorationTheme(
             focusColor: AppConstants.instance.grey,
-            labelStyle: const TextStyle(),
             contentPadding: EdgeInsets.zero,
             filled: true,
             enabledBorder: const OutlineInputBorder(

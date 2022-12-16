@@ -60,9 +60,4 @@ class TextThemeDark {
     fontWeight: FontWeight.w400,
     color: AppConstants.instance.grey,
   );
-
-  final TextStyle button = GoogleFonts.inter(
-    fontSize: 18.sp,
-    color: Colors.white,
-  );
 }
