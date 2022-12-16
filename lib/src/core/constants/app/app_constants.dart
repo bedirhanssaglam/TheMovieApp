@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppConstants {
   static AppConstants? _instance;
-  static AppConstants? get instance {
+  static AppConstants get instance {
     _instance ??= AppConstants._init();
-    return _instance;
+    return _instance!;
   }
 
   AppConstants._init();
 
+  final String appName = "The Movie";
+  final String apiKey = "[YOUR_API_KEY]";
   final String baseUrl = "https://api.themoviedb.org/3/";
   final String baserUrlForImage = "https://image.tmdb.org/t/p/original/";
 
