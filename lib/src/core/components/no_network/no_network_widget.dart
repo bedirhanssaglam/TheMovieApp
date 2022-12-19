@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../components/text/custom_text.dart';
+import '../text/custom_text.dart';
 import '../../constants/enums/network_result_enums.dart';
 import '../../init/network/network_change_manager.dart';
 import '../../mixins/state_mixin.dart';

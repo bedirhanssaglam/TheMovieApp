@@ -5,7 +5,7 @@ import 'package:the_movie/src/core/components/appbar/custom_app_bar.dart';
 import 'package:the_movie/src/core/components/text/custom_text.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 
-import '../../core/components/movieCard/movie_card.dart';
+import '../../core/components/movie_card/movie_card.dart';
 import '../../core/constants/app/app_constants.dart';
 import 'widgets/circular_categories.dart';
 import 'widgets/slider_movies.dart';
@@ -21,9 +21,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        isHomeView: true,
-      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
         child: SingleChildScrollView(

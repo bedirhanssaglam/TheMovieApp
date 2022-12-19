@@ -29,7 +29,7 @@ class AppThemeDark extends AppTheme with ITheme {
           subtitle2: textThemeDark!.subtitle2,
         ),
         appBarTheme: ThemeData.light().appBarTheme.copyWith(
-            color: AppConstants.instance.outerSpace,
+            color: AppConstants.instance.shark,
             elevation: 3,
             iconTheme:
                 IconThemeData(color: AppConstants.instance.grey, size: 21),

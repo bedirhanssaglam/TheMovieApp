@@ -7,7 +7,7 @@ import 'package:the_movie/src/core/extensions/string_extensions.dart';
 import '../../base/functions/base_functions.dart';
 import '../../constants/app/app_constants.dart';
 import '../../constants/enums/icon_enums.dart';
-import '../textFormField/text_form_field_widget.dart';
+import '../text_form_field/text_form_field_widget.dart';
 
 class CustomAppBar extends AppBar {
   CustomAppBar({

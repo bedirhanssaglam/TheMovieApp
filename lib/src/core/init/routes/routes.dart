@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:the_movie/src/view/discover/discover_view.dart';
+import 'package:the_movie/src/view/now_playing_movies/now_playing_movies_view.dart';
 import 'package:the_movie/src/view/splash/splash_view.dart';
+import 'package:the_movie/src/view/top_rated/top_rated_view.dart';
 
 import '../../../view/home/home_view.dart';
 import '../../base/functions/base_functions.dart';
+import '../../components/scaffold/custom_scaffold.dart';
 import '../../constants/enums/route_enums.dart';
+
+final GlobalKey<NavigatorState> rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'root');
 
 final GlobalKey<NavigatorState> mainNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'main');
@@ -19,7 +26,7 @@ class Routes {
   Routes._init();
 
   GoRouter routes = GoRouter(
-    navigatorKey: mainNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     initialLocation: RouteEnums.home.routeName,
     debugLogDiagnostics: true,
     routes: <RouteBase>[
@@ -32,14 +39,53 @@ class Routes {
           );
         },
       ),
-      GoRoute(
-        path: RouteEnums.home.routeName,
-        pageBuilder: (context, state) {
-          return animatedRouting(
-            state: state,
-            route: const HomeView(),
-          );
-        },
+      ShellRoute(
+        navigatorKey: mainNavigatorKey,
+        pageBuilder: (context, state, child) => animatedRouting(
+          state: state,
+          route: CustomScaffold(
+            navigatorState: state,
+            child: child,
+          ),
+        ),
+        routes: <RouteBase>[
+          GoRoute(
+            path: RouteEnums.home.routeName,
+            pageBuilder: (context, state) {
+              return animatedRouting(
+                state: state,
+                route: const HomeView(),
+              );
+            },
+          ),
+          GoRoute(
+            path: RouteEnums.discover.routeName,
+            pageBuilder: (context, state) {
+              return animatedRouting(
+                state: state,
+                route: const DiscoverView(),
+              );
+            },
+          ),
+          GoRoute(
+            path: RouteEnums.topRated.routeName,
+            pageBuilder: (context, state) {
+              return animatedRouting(
+                state: state,
+                route: const TopRatedView(),
+              );
+            },
+          ),
+          GoRoute(
+            path: RouteEnums.nowPlayingMovies.routeName,
+            pageBuilder: (context, state) {
+              return animatedRouting(
+                state: state,
+                route: const NowPlayingMoviesView(),
+              );
+            },
+          ),
+        ],
       ),
     ],
   );
