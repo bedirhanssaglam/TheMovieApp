@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:kartal/kartal.dart';
-import 'package:the_movie/src/core/components/appbar/custom_app_bar.dart';
-import 'package:the_movie/src/core/components/text/custom_text.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 
 import '../../core/components/movie_card/movie_card.dart';
@@ -40,23 +37,27 @@ class _HomeViewState extends State<HomeView> {
                 secondTextColor: AppConstants.instance.malibu,
               ),
               4.h.ph,
-              SizedBox(
-                height: 20.h,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: 3.w),
-                      child: const MovieCard(),
-                    );
-                  },
-                ),
-              ),
+              _recommendedMoviesList(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox _recommendedMoviesList() {
+    return SizedBox(
+      height: 20.h,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(right: 3.w),
+            child: const MovieCard(),
+          );
+        },
       ),
     );
   }
