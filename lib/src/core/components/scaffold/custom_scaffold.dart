@@ -60,8 +60,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           navigatorState: widget.navigatorState,
           isHomeView: currentTabIndex == 0,
         ),
-        body: widget.child,
         bottomNavigationBar: bottomNavBar(),
+        body: widget.child,
       ),
     );
   }

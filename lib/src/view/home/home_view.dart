@@ -7,6 +7,7 @@ import 'package:the_movie/src/core/extensions/num_extensions.dart';
 
 import '../../core/components/movie_card/movie_card.dart';
 import '../../core/constants/app/app_constants.dart';
+import 'widgets/banner_title.dart';
 import 'widgets/circular_categories.dart';
 import 'widgets/slider_movies.dart';
 
@@ -27,27 +28,29 @@ class _HomeViewState extends State<HomeView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              2.h.ph,
+              4.h.ph,
               _circularCategoriesList(),
               3.h.ph,
-              SliderMovies(),
-              3.h.ph,
-              CustomText(
-                "Top Rated",
-                textStyle: context.textTheme.headline2,
+              const SliderMovies(),
+              5.h.ph,
+              BannerTitle(
+                firstText: "Recommended ",
+                secondText: "Movies",
+                firstTextColor: AppConstants.instance.dodgerBlue,
+                secondTextColor: AppConstants.instance.malibu,
               ),
-              2.h.ph,
+              4.h.ph,
               SizedBox(
                 height: 20.h,
-                child: GridView.builder(
+                child: ListView.builder(
+                  shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 1.w,
-                  ),
-                  itemCount: 6,
+                  itemCount: 10,
                   itemBuilder: (context, index) {
-                    return const MovieCard();
+                    return Padding(
+                      padding: EdgeInsets.only(right: 3.w),
+                      child: const MovieCard(),
+                    );
                   },
                 ),
               ),
