@@ -19,17 +19,17 @@ class AppConstants {
   final List<Map<String, String>> splashData = [
     {
       "text":
-          "A comprehensive news application that brings together all the news you need to know in Turkey and the US during the day.",
+          "The Movie allows you to see the upcoming movies, the most watched movies and your favorite actors. In addition, it allows you to have information about these movies.",
       "image": IconEnums.introFirst.iconName,
     },
     {
       "text":
-          "Thanks to The News, which brings together the prominent topics of the agenda and last-minute developments, as well as many resources for different interests, everything you should not miss is at your fingertips.",
+          "The application uses the TMDB API. In this way, you can access this data in the fastest way from anywhere.",
       "image": IconEnums.introSecond.iconName,
     },
     {
       "text":
-          "Come every day and check out all the news that might interest you! So let's start!",
+          "Millions of movies, TV shows and people to discover. Explore now!",
       "image": IconEnums.introThird.iconName,
     },
   ];

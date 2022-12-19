@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
 import 'package:bot_toast/bot_toast.dart';
 
 import 'src/core/constants/app/app_constants.dart';
+import 'src/core/init/dependency_injector.dart';
 import 'src/core/init/main_build/main_build.dart';
 import 'src/core/init/routes/routes.dart';
 import 'src/core/init/theme/theme_data.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    MultiRepositoryProvider(
+      providers: DependencyInjector.instance.repositoryProviders,
+      child: MultiBlocProvider(
+        providers: DependencyInjector.instance.globalBlocProviders,
+        child: const ProviderScope(
+          child: MyApp(),
+        ),
+      ),
     ),
   );
 }

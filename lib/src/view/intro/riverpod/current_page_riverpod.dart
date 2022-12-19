@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final StateNotifierProvider<CurrentPageStatus, Object?> currentPageRiverpod =
+final StateNotifierProvider<CurrentPageRiverpod, Object?> currentPageRiverpod =
     StateNotifierProvider((ref) {
-  return CurrentPageStatus();
+  return CurrentPageRiverpod();
 });
 
-class CurrentPageStatus extends StateNotifier<int> {
-  CurrentPageStatus() : super(0);
+class CurrentPageRiverpod extends StateNotifier<int> {
+  CurrentPageRiverpod() : super(0);
 }

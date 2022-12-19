@@ -29,7 +29,7 @@ class Routes {
 
   GoRouter routes = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: RouteEnums.splash.routeName,
+    initialLocation: RouteEnums.home.routeName,
     debugLogDiagnostics: true,
     routes: <RouteBase>[
       GoRoute(

@@ -54,7 +54,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                   ..duration = composition.duration
                   ..forward().whenComplete(
                     () => context.go(
-                      RouteEnums.home.routeName,
+                      RouteEnums.intro.routeName,
                     ),
                   );
               },

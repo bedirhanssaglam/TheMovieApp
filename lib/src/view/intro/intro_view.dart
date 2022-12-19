@@ -22,16 +22,19 @@ class IntroView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Column(
-        children: [
-          5.h.ph,
-          Consumer(
-            builder: (context, ref, child) {
-              return _buildIntroHeader(ref);
-            },
-          ),
-          _buildPageDots(ref, context),
-        ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        child: Column(
+          children: [
+            10.h.ph,
+            Consumer(
+              builder: (context, ref, child) {
+                return _buildIntroHeader(ref);
+              },
+            ),
+            _buildPageDots(ref, context),
+          ],
+        ),
       ),
     );
   }
