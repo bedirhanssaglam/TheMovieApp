@@ -1,5 +1,6 @@
 enum RouteEnums {
   splash('/splash'),
+  intro('/intro'),
   home('/home'),
   discover('/discover'),
   topRated('/top-rated'),

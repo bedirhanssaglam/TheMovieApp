@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:the_movie/src/view/discover/discover_view.dart';
+import 'package:the_movie/src/view/intro/intro_view.dart';
 import 'package:the_movie/src/view/movie_details/movie_details_view.dart';
 import 'package:the_movie/src/view/now_playing_movies/now_playing_movies_view.dart';
 import 'package:the_movie/src/view/splash/splash_view.dart';
@@ -28,7 +29,7 @@ class Routes {
 
   GoRouter routes = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: RouteEnums.movieDetails.routeName,
+    initialLocation: RouteEnums.splash.routeName,
     debugLogDiagnostics: true,
     routes: <RouteBase>[
       GoRoute(
@@ -37,6 +38,15 @@ class Routes {
           return animatedRouting(
             state: state,
             route: const SplashView(),
+          );
+        },
+      ),
+      GoRoute(
+        path: RouteEnums.intro.routeName,
+        pageBuilder: (context, state) {
+          return animatedRouting(
+            state: state,
+            route: IntroView(),
           );
         },
       ),
