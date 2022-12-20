@@ -15,9 +15,9 @@ PaginatedListResponse<T>
           parseModel: _$nullableGenericFromJson(json['parseModel'], fromJsonT),
           page: json['page'] as int?,
           results: (json['results'] as List<dynamic>?)?.map(fromJsonT).toList(),
-        )
-          ..totalPages = json['total_pages'] as int?
-          ..totalResults = json['total_results'] as int?;
+          totalPages: json['total_pages'] as int?,
+          totalResults: json['total_results'] as int?,
+        );
 
 Map<String, dynamic>
     _$PaginatedListResponseToJson<T extends INetworkModel<dynamic>>(

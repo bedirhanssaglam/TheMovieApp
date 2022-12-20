@@ -10,6 +10,8 @@ class PaginatedListResponse<T extends INetworkModel> extends INetworkModel {
     this.parseModel,
     this.page,
     this.results,
+    this.totalPages,
+    this.totalResults,
   });
 
   T? parseModel;

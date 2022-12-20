@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_movie/src/view/home/cubit/genres_cubit.dart';
-import 'package:the_movie/src/view/home/service/genres_service.dart';
-import 'package:the_movie/src/view/home/service/interface_genres_service.dart';
+import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
+import 'package:the_movie/src/core/base/services/interface_movie_service.dart';
 import 'package:vexana/vexana.dart';
 
+import '../base/services/movie_service.dart';
 import 'network/vexana_manager.dart';
 
 class DependencyInjector {
@@ -15,20 +15,20 @@ class DependencyInjector {
   }
 
   late final INetworkManager networkManager;
-  late final IGenresService genresService;
-  late final GenresCubit genresCubit;
+  late final IMovieService genresService;
+  late final MovieCubit movieCubit;
 
   DependencyInjector._init() {
     networkManager = VexanaManager.instance.networkManager;
-    genresService = GenresService(networkManager);
-    genresCubit = GenresCubit(genresService);
+    genresService = MovieService(networkManager);
+    movieCubit = MovieCubit(genresService);
   }
 
   List<RepositoryProvider> get repositoryProviders => [
-        RepositoryProvider<IGenresService>(create: (context) => genresService),
+        RepositoryProvider<IMovieService>(create: (context) => genresService),
       ];
 
   List<BlocProvider<Cubit>> get globalBlocProviders => [
-        BlocProvider<GenresCubit>(create: (context) => genresCubit),
+        BlocProvider<MovieCubit>(create: (context) => movieCubit),
       ];
 }

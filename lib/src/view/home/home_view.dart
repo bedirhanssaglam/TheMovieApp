@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:kartal/kartal.dart';
+import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
 import 'package:the_movie/src/core/base/functions/base_functions.dart';
+import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/init/network/vexana_manager.dart';
-import 'package:the_movie/src/view/home/service/genres_service.dart';
 
-import '../../core/components/movie_card/movie_card.dart';
+import '../../core/base/models/genres_model.dart';
 import '../../core/constants/app/app_constants.dart';
-import 'cubit/genres_cubit.dart';
-import 'model/genres_model.dart';
 import 'widgets/banner_title.dart';
 import 'widgets/circular_categories.dart';
+import 'widgets/movie_star_card.dart';
 import 'widgets/slider_movies.dart';
 
 class HomeView extends StatefulWidget {
@@ -22,14 +23,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late GenresCubit genresCubit;
+  late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    genresCubit =
-        GenresCubit(GenresService(VexanaManager.instance.networkManager));
-    genresCubit.fetchAllGenres();
+    movieCubit =
+        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit.fetchAllGenres();
   }
 
   @override
@@ -42,29 +43,14 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               4.h.ph,
-              BlocBuilder<GenresCubit, GenresState>(
-                bloc: genresCubit,
+              BlocBuilder<MovieCubit, MovieState>(
+                bloc: movieCubit,
                 builder: (context, state) {
                   if (state is GenresLoading) {
                     return platformIndicator();
                   } else if (state is GenresLoaded) {
                     final List<GenresModel> genres = state.genres;
-                    return SizedBox(
-                      height: 16.h,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        padding: EdgeInsets.only(right: 2.w),
-                        itemBuilder: (context, index) {
-                          return CircularCategories(
-                            image:
-                                "${AppConstants.instance.baserUrlForImage}tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
-                            text: "${genres[index].name}",
-                          );
-                        },
-                      ),
-                    );
+                    return _buildGenresList(genres);
                   } else if (state is GenresError) {
                     return errorText(state.errorMessage);
                   } else {
@@ -76,13 +62,13 @@ class _HomeViewState extends State<HomeView> {
               const SliderMovies(),
               5.h.ph,
               BannerTitle(
-                firstText: "Recommended ",
-                secondText: "Movies",
+                firstText: "Trend ",
+                secondText: "Movie Stars",
                 firstTextColor: AppConstants.instance.dodgerBlue,
                 secondTextColor: AppConstants.instance.malibu,
               ),
               4.h.ph,
-              _recommendedMoviesList(),
+              const MovieStarCard(),
             ],
           ),
         ),
@@ -90,24 +76,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  SizedBox _recommendedMoviesList() {
-    return SizedBox(
-      height: 20.h,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(right: 3.w),
-            child: const MovieCard(),
-          );
-        },
-      ),
-    );
-  }
-
-  SizedBox _circularCategoriesList() {
+  SizedBox _buildGenresList(List<GenresModel> genres) {
     return SizedBox(
       height: 16.h,
       child: ListView.builder(
@@ -118,8 +87,8 @@ class _HomeViewState extends State<HomeView> {
         itemBuilder: (context, index) {
           return CircularCategories(
             image:
-                "${AppConstants.instance.baserUrlForImage}tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
-            text: "Action",
+                "${AppConstants.instance.baserUrlForImage}/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+            text: "${genres[index].name}",
           );
         },
       ),
