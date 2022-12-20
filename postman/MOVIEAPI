@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "5dfc0489-9f3e-4f59-b144-d9e0e4fe19e1",
+		"name": "MOVIE API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21591828"
+	},
+	"item": [
+		{
+			"name": "GET TOP MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}movie/top_rated?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}movie"
+					],
+					"path": [
+						"top_rated"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET DISCOVER MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}discover/movie?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}discover"
+					],
+					"path": [
+						"movie"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET NOW PLAYING MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}movie/now_playing?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}movie"
+					],
+					"path": [
+						"now_playing"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TREND ACTOR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}trending/person/week?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}trending"
+					],
+					"path": [
+						"person",
+						"week"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET MOVIE DETAILS (BY ID)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}movie/238?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}movie"
+					],
+					"path": [
+						"238"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET SEARCHED MOVIE (BY SEARCHWORD)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}search/movie?api_key={{api_key}}&query=Godfather",
+					"host": [
+						"{{base_url_movie}}search"
+					],
+					"path": [
+						"movie"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						},
+						{
+							"key": "language",
+							"value": "en-US",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "include_adult",
+							"value": "false",
+							"disabled": true
+						},
+						{
+							"key": "query",
+							"value": "Godfather"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL CATEGORIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_movie}}genre/movie/list?api_key={{api_key}}",
+					"host": [
+						"{{base_url_movie}}genre"
+					],
+					"path": [
+						"movie",
+						"list"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

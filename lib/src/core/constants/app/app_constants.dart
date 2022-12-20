@@ -12,7 +12,7 @@ class AppConstants {
   AppConstants._init();
 
   final String appName = "The Movie";
-  final String apiKey = "[YOUR_API_KEY]";
+  final String apiKey = "[YOUR_API_KEY]]";
   final String baseUrl = "https://api.themoviedb.org/3/";
   final String baserUrlForImage = "https://image.tmdb.org/t/p/original";
 
