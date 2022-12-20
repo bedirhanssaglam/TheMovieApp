@@ -85,4 +85,20 @@ class MovieService extends IMovieService {
     );
     return response.data;
   }
+
+  @override
+  Future<List<MovieModel>> fetchSearchedMovie(String searchWord) async {
+    var response = await networkManager.send(
+      NetworkEnums.searchMovie.endpointName,
+      parseModel: PaginatedListResponse(
+        parseModel: MovieModel(),
+      ),
+      method: RequestType.GET,
+      queryParameters: {
+        "api_key": AppConstants.instance.apiKey,
+        "query": searchWord,
+      },
+    );
+    return response.data.results;
+  }
 }

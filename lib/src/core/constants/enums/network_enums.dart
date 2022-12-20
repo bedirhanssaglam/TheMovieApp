@@ -4,7 +4,8 @@ enum NetworkEnums {
   topRated('movie/top_rated'),
   nowPlaying('movie/now_playing'),
   discover('discover/movie'),
-  movieDetails('movie/');
+  movieDetails('movie/'),
+  searchMovie('search/movie');
 
   final String endpointName;
   const NetworkEnums(this.endpointName);

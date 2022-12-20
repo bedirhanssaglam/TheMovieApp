@@ -3,6 +3,7 @@ import 'package:kartal/kartal.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/base/functions/base_functions.dart';
+import 'package:the_movie/src/core/components/snackbar/snackbar_widget.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
 
@@ -42,7 +43,10 @@ class DetailDescriptionWidget extends StatelessWidget {
               ),
               3.h.ph,
               CustomText(
-                "${movie.overview}",
+                toShortString(
+                  "${movie.overview}",
+                  countCharacter: 330,
+                ),
                 textStyle: context.textTheme.headline1?.copyWith(
                   color: AppConstants.instance.outerSpace,
                 ),
@@ -51,7 +55,10 @@ class DetailDescriptionWidget extends StatelessWidget {
               Row(
                 children: [
                   ButtonWidget(
-                    onTap: () {},
+                    onTap: () {
+                      snackbarWidget(context,
+                          message: "This feature is not yet supported.");
+                    },
                     text: "BUY",
                     width: 75,
                   ),

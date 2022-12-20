@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_movie/src/core/components/snackbar/snackbar_widget.dart';
 import 'package:the_movie/src/core/constants/enums/route_enums.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
 
@@ -136,7 +137,10 @@ class _CustomAppBarState extends State<CustomAppBar>
       widget.isOpenSearch = !widget.isOpenSearch;
       widget._formKey.currentState?.save();
       if (widget.searchWord.isEmpty) {
-      } else {}
+        snackbarWidget(context, message: "This field cannot be left blank.");
+      } else {
+        context.go("/searched-movies/${widget.searchWord}");
+      }
     });
   }
 }

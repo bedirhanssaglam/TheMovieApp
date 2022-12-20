@@ -14,5 +14,6 @@ abstract class IMovieService {
   Future<List<MovieModel>> fetchAllTopRatedMovies();
   Future<List<MovieModel>> fetchNowPlayinMovies();
   Future<List<MovieModel>> fetchDiscoverMovies();
+  Future<List<MovieModel>> fetchSearchedMovie(String searchWord);
   Future<MovieModel> fetchMovieDetailsById(int id);
 }

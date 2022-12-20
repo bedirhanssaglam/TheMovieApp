@@ -75,7 +75,7 @@ closePopup(BuildContext context) {
   Navigator.of(context, rootNavigator: true).pop();
 }
 
-String toShortString(String value, {int countCharacter = 23}) {
+String toShortString(String value, {int countCharacter = 21}) {
   return value.length > countCharacter
       ? "${value.substring(0, countCharacter)}..."
       : value;

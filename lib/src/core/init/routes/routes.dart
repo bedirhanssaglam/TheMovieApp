@@ -4,6 +4,7 @@ import 'package:the_movie/src/view/discover/discover_view.dart';
 import 'package:the_movie/src/view/intro/intro_view.dart';
 import 'package:the_movie/src/view/movie_details/movie_details_view.dart';
 import 'package:the_movie/src/view/now_playing_movies/now_playing_movies_view.dart';
+import 'package:the_movie/src/view/searched_movies/searched_movies_view.dart';
 import 'package:the_movie/src/view/splash/splash_view.dart';
 import 'package:the_movie/src/view/top_rated/top_rated_view.dart';
 
@@ -29,7 +30,7 @@ class Routes {
 
   GoRouter routes = GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: RouteEnums.home.routeName,
+    initialLocation: RouteEnums.splash.routeName,
     debugLogDiagnostics: true,
     routes: <RouteBase>[
       GoRoute(
@@ -57,6 +58,17 @@ class Routes {
             state: state,
             route: MovieDetailsView(
               id: int.tryParse(state.params['id'] ?? "")!,
+            ),
+          );
+        },
+      ),
+      GoRoute(
+        path: RouteEnums.searchedMovies.routeName,
+        pageBuilder: (context, state) {
+          return animatedRouting(
+            state: state,
+            route: SearchedMoviesView(
+              searchWord: state.params['searchWord'] ?? "",
             ),
           );
         },

@@ -73,4 +73,15 @@ class MovieCubit extends Cubit<MovieState> {
       emit(FetchMovieDetailsError(e.toString()));
     }
   }
+
+  Future<void> fetchSearchedMovie(String searchWord) async {
+    emit(FetchSearchedMovieLoading());
+    try {
+      final List<MovieModel> movies =
+          await movieService.fetchSearchedMovie(searchWord);
+      emit(FetchSearchedMovieLoaded(movies));
+    } catch (e) {
+      emit(FetchSearchedMovieError(e.toString()));
+    }
+  }
 }

@@ -128,3 +128,23 @@ class FetchMovieDetailsError extends MovieState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class FetchSearchedMovieLoading extends MovieState {}
+
+class FetchSearchedMovieLoaded extends MovieState {
+  final List<MovieModel> movies;
+
+  const FetchSearchedMovieLoaded(this.movies);
+
+  @override
+  List<Object> get props => [movies];
+}
+
+class FetchSearchedMovieError extends MovieState {
+  final String errorMessage;
+
+  const FetchSearchedMovieError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}

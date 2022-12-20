@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/models/movie_model.dart';
@@ -60,17 +61,22 @@ class _SliderMoviesState extends State<SliderMovies> {
     return SliderMovieCard(
       children: List.generate(
         5,
-        (index) => Container(
-          height: 20.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                "${AppConstants.instance.baserUrlForImage}${movies[index].backdropPath}",
+        (index) => InkWell(
+          onTap: () {
+            context.go('/movie-details/${movies[index].id}');
+          },
+          child: Container(
+            height: 20.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  "${AppConstants.instance.baserUrlForImage}${movies[index].backdropPath}",
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
         ),
       ),
