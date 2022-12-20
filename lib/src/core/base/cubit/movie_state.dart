@@ -48,3 +48,23 @@ class MovieStarsError extends MovieState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class TopRatedMoviesLoading extends MovieState {}
+
+class TopRatedMoviesLoaded extends MovieState {
+  final List<MovieModel> movies;
+
+  const TopRatedMoviesLoaded(this.movies);
+
+  @override
+  List<Object> get props => [movies];
+}
+
+class TopRatedMoviesError extends MovieState {
+  final String errorMessage;
+
+  const TopRatedMoviesError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}

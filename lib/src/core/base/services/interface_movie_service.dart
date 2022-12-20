@@ -10,6 +10,6 @@ abstract class IMovieService {
   IMovieService(this.networkManager);
 
   Future<List<GenresModel>> fetchAllGenres();
-
   Future<List<MovieStarModel>> fetchAllMovieStars();
+  Future<List<MovieModel>> fetchAllTopRatedMovies();
 }

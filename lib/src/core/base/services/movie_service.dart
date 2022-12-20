@@ -35,4 +35,17 @@ class MovieService extends IMovieService {
     );
     return response.data.results;
   }
+
+  @override
+  Future<List<MovieModel>> fetchAllTopRatedMovies() async {
+    var response = await networkManager.send(
+      NetworkEnums.topRated.endpointName,
+      parseModel: PaginatedListResponse(
+        parseModel: MovieModel(),
+      ),
+      method: RequestType.GET,
+      queryParameters: {"api_key": AppConstants.instance.apiKey},
+    );
+    return response.data.results;
+  }
 }

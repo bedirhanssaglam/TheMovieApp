@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:kartal/kartal.dart';
 import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
 import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
