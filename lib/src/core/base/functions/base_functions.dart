@@ -18,7 +18,7 @@ Widget platformIndicator() {
 
 IconButton platformBackButton({
   required VoidCallback onPressed,
-  Color? color = Colors.black,
+  Color? color = Colors.grey,
 }) {
   return Platform.isIOS
       ? IconButton(
@@ -75,8 +75,13 @@ closePopup(BuildContext context) {
   Navigator.of(context, rootNavigator: true).pop();
 }
 
-String toShortString(String value, {int countCharacter = 8}) {
+String toShortString(String value, {int countCharacter = 23}) {
   return value.length > countCharacter
       ? "${value.substring(0, countCharacter)}..."
       : value;
+}
+
+String toShortDoubleNumber(double value) {
+  String number = value.toString();
+  return "${number.split(".").first}.${number.split(".")[1].substring(0, 1)}";
 }

@@ -68,3 +68,63 @@ class TopRatedMoviesError extends MovieState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class NowPlayingMoviesLoading extends MovieState {}
+
+class NowPlayingMoviesLoaded extends MovieState {
+  final List<MovieModel> movies;
+
+  const NowPlayingMoviesLoaded(this.movies);
+
+  @override
+  List<Object> get props => [movies];
+}
+
+class NowPlayingMoviesError extends MovieState {
+  final String errorMessage;
+
+  const NowPlayingMoviesError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class FetchDiscoverMoviesLoading extends MovieState {}
+
+class FetchDiscoverMoviesLoaded extends MovieState {
+  final List<MovieModel> movies;
+
+  const FetchDiscoverMoviesLoaded(this.movies);
+
+  @override
+  List<Object> get props => [movies];
+}
+
+class FetchDiscoverMoviesError extends MovieState {
+  final String errorMessage;
+
+  const FetchDiscoverMoviesError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class FetchMovieDetailsLoading extends MovieState {}
+
+class FetchMovieDetailsLoaded extends MovieState {
+  final MovieModel movie;
+
+  const FetchMovieDetailsLoaded(this.movie);
+
+  @override
+  List<Object> get props => [movie];
+}
+
+class FetchMovieDetailsError extends MovieState {
+  final String errorMessage;
+
+  const FetchMovieDetailsError(this.errorMessage);
+
+  @override
+  List<Object> get props => [errorMessage];
+}

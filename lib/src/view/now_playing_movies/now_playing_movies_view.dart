@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_movie/src/core/base/functions/base_functions.dart';
+import 'package:the_movie/src/core/base/models/movie_model.dart';
+import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/components/text/custom_text.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
+import 'package:the_movie/src/core/init/network/vexana_manager.dart';
 
+import '../../core/base/cubit/movie_cubit.dart';
 import '../../core/components/movie_list_tile/movie_list_tile.dart';
 
 class NowPlayingMoviesView extends StatefulWidget {
@@ -14,6 +20,16 @@ class NowPlayingMoviesView extends StatefulWidget {
 }
 
 class _NowPlayingMoviesViewState extends State<NowPlayingMoviesView> {
+  late MovieCubit movieCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    movieCubit =
+        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit.fetchNowPlayingMovies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +45,31 @@ class _NowPlayingMoviesViewState extends State<NowPlayingMoviesView> {
                 textStyle: context.textTheme.headline2,
               ),
               3.h.ph,
-              const MovieListTile(),
+              BlocBuilder<MovieCubit, MovieState>(
+                bloc: movieCubit,
+                builder: (context, state) {
+                  if (state is NowPlayingMoviesLoading) {
+                    return platformIndicator();
+                  } else if (state is NowPlayingMoviesLoaded) {
+                    final List<MovieModel> movies = state.movies;
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return MovieListTile(
+                          movies: movies,
+                          index: index,
+                        );
+                      },
+                    );
+                  } else if (state is NowPlayingMoviesError) {
+                    return errorText(state.errorMessage);
+                  } else {
+                    return errorText("Something went wrong!");
+                  }
+                },
+              ),
             ],
           ),
         ),

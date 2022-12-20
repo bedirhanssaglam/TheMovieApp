@@ -5,7 +5,7 @@ enum RouteEnums {
   discover('/discover'),
   topRated('/top-rated'),
   nowPlayingMovies('/now-playing-movies'),
-  movieDetails('/movie-details');
+  movieDetails('/movie-details/:id');
 
   final String routeName;
   const RouteEnums(this.routeName);

@@ -43,4 +43,34 @@ class MovieCubit extends Cubit<MovieState> {
       emit(TopRatedMoviesError(e.toString()));
     }
   }
+
+  Future<void> fetchNowPlayingMovies() async {
+    emit(NowPlayingMoviesLoading());
+    try {
+      final List<MovieModel> movies = await movieService.fetchNowPlayinMovies();
+      emit(NowPlayingMoviesLoaded(movies));
+    } catch (e) {
+      emit(NowPlayingMoviesError(e.toString()));
+    }
+  }
+
+  Future<void> fetchDiscoverMovies() async {
+    emit(FetchDiscoverMoviesLoading());
+    try {
+      final List<MovieModel> movies = await movieService.fetchDiscoverMovies();
+      emit(FetchDiscoverMoviesLoaded(movies));
+    } catch (e) {
+      emit(FetchDiscoverMoviesError(e.toString()));
+    }
+  }
+
+  Future<void> fetchMovieDetailsById(int id) async {
+    emit(FetchMovieDetailsLoading());
+    try {
+      final MovieModel movie = await movieService.fetchMovieDetailsById(id);
+      emit(FetchMovieDetailsLoaded(movie));
+    } catch (e) {
+      emit(FetchMovieDetailsError(e.toString()));
+    }
+  }
 }

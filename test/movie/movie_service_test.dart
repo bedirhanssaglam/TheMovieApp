@@ -23,4 +23,19 @@ void main() {
     var response = await movieService.fetchAllTopRatedMovies();
     expect(response, isNotEmpty);
   });
+
+  test('fetch all top rated movies test', () async {
+    var response = await movieService.fetchNowPlayinMovies();
+    expect(response, isNotEmpty);
+  });
+
+  test('fetch discover movies test', () async {
+    var response = await movieService.fetchDiscoverMovies();
+    expect(response, isNotEmpty);
+  });
+
+  test('fetch movie details test', () async {
+    var response = await movieService.fetchMovieDetailsById(238);
+    expect(response, isNotNull);
+  });
 }

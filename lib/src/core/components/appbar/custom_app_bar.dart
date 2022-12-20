@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
+import 'package:the_movie/src/core/constants/enums/route_enums.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
 
 import '../../base/functions/base_functions.dart';
@@ -12,13 +13,11 @@ import '../text_form_field/text_form_field_widget.dart';
 class CustomAppBar extends AppBar {
   CustomAppBar({
     Key? key,
-    this.isHomeView = false,
-    this.onTap,
+    this.isDetailOrSearchView = false,
     this.navigatorState,
   }) : super(key: key);
 
-  final bool? isHomeView;
-  final VoidCallback? onTap;
+  final bool? isDetailOrSearchView;
   bool isOpenSearch = false;
 
   late String searchWord;
@@ -45,7 +44,7 @@ class _CustomAppBarState extends State<CustomAppBar>
     return !widget.isOpenSearch
         ? AppBar(
             automaticallyImplyLeading: false,
-            leading: widget.isHomeView!
+            leading: !widget.isDetailOrSearchView!
                 ? IconButton(
                     onPressed: () {},
                     icon: SvgPicture.asset(
@@ -54,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar>
                     ),
                   )
                 : platformBackButton(
-                    onPressed: widget.onTap ?? () {},
+                    onPressed: () => context.go(RouteEnums.home.routeName),
                   ),
             centerTitle: true,
             title: Image.asset(

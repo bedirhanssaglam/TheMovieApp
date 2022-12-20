@@ -48,4 +48,41 @@ class MovieService extends IMovieService {
     );
     return response.data.results;
   }
+
+  @override
+  Future<List<MovieModel>> fetchNowPlayinMovies() async {
+    var response = await networkManager.send(
+      NetworkEnums.nowPlaying.endpointName,
+      parseModel: PaginatedListResponse(
+        parseModel: MovieModel(),
+      ),
+      method: RequestType.GET,
+      queryParameters: {"api_key": AppConstants.instance.apiKey},
+    );
+    return response.data.results;
+  }
+
+  @override
+  Future<List<MovieModel>> fetchDiscoverMovies() async {
+    var response = await networkManager.send(
+      NetworkEnums.discover.endpointName,
+      parseModel: PaginatedListResponse(
+        parseModel: MovieModel(),
+      ),
+      method: RequestType.GET,
+      queryParameters: {"api_key": AppConstants.instance.apiKey},
+    );
+    return response.data.results;
+  }
+
+  @override
+  Future<MovieModel> fetchMovieDetailsById(int id) async {
+    var response = await networkManager.send(
+      "${NetworkEnums.movieDetails.endpointName}$id",
+      parseModel: MovieModel(),
+      method: RequestType.GET,
+      queryParameters: {"api_key": AppConstants.instance.apiKey},
+    );
+    return response.data;
+  }
 }

@@ -55,7 +55,9 @@ class Routes {
         pageBuilder: (context, state) {
           return animatedRouting(
             state: state,
-            route: const MovieDetailsView(),
+            route: MovieDetailsView(
+              id: int.tryParse(state.params['id'] ?? "")!,
+            ),
           );
         },
       ),

@@ -10,7 +10,7 @@ import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/components/text/custom_text.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/init/network/vexana_manager.dart';
-import 'widgets/top_rated_movie_card.dart';
+import 'widgets/top_rated_movie_list.dart';
 
 class TopRatedView extends StatefulWidget {
   const TopRatedView({super.key});
@@ -52,7 +52,7 @@ class _TopRatedViewState extends State<TopRatedView> {
                     return platformIndicator();
                   } else if (state is TopRatedMoviesLoaded) {
                     final List<MovieModel> movies = state.movies;
-                    return TopRatedMovieCard(movies: movies);
+                    return TopRatedMovieList(movies: movies);
                   } else if (state is TopRatedMoviesError) {
                     return errorText(state.errorMessage);
                   } else {

@@ -65,6 +65,7 @@ class _MovieStarCardState extends State<MovieStarCard> {
               children: [
                 CircleAvatar(
                   radius: 8.h,
+                  backgroundColor: AppConstants.instance.outerSpace,
                   backgroundImage: NetworkImage(
                     "${AppConstants.instance.baserUrlForImage}${movieStars[index].profilePath}",
                   ),

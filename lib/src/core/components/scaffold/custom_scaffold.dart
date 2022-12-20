@@ -10,8 +10,11 @@ class CustomScaffold extends StatefulWidget {
   final Widget child;
   final GoRouterState? navigatorState;
 
-  const CustomScaffold({Key? key, required this.child, this.navigatorState})
-      : super(key: key);
+  const CustomScaffold({
+    Key? key,
+    required this.child,
+    this.navigatorState,
+  }) : super(key: key);
 
   @override
   State<CustomScaffold> createState() => _CustomScaffoldState();
@@ -58,7 +61,6 @@ class _CustomScaffoldState extends State<CustomScaffold> {
       child: Scaffold(
         appBar: CustomAppBar(
           navigatorState: widget.navigatorState,
-          isHomeView: currentTabIndex == 0,
         ),
         bottomNavigationBar: bottomNavBar(),
         body: widget.child,

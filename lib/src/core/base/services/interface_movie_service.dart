@@ -12,4 +12,7 @@ abstract class IMovieService {
   Future<List<GenresModel>> fetchAllGenres();
   Future<List<MovieStarModel>> fetchAllMovieStars();
   Future<List<MovieModel>> fetchAllTopRatedMovies();
+  Future<List<MovieModel>> fetchNowPlayinMovies();
+  Future<List<MovieModel>> fetchDiscoverMovies();
+  Future<MovieModel> fetchMovieDetailsById(int id);
 }
