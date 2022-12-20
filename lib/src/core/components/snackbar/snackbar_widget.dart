@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../constants/app/app_constants.dart';
 import '../text/custom_text.dart';

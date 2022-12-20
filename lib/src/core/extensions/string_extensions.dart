@@ -8,11 +8,6 @@ extension ImagePath on String {
   String get toJson => "assets/lottie/$this.json";
 }
 
-extension StringValidatorExtension on String? {
-  bool get isNullOrEmpty => this == null || this!.isEmpty;
-  bool get isNotNullOrNoEmpty => this != null && this!.isNotEmpty;
-}
-
 extension NumberParsing on String {
   int get parseInt => int.parse(this);
 
