@@ -4,10 +4,10 @@ import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/base/models/movie_model.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
 
-class TopRatedMovieCard extends StatelessWidget {
+class TopRatedMovieCard extends StatelessWidget with BaseSingleton {
   const TopRatedMovieCard({
     Key? key,
     required this.movies,
@@ -33,7 +33,7 @@ class TopRatedMovieCard extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "${AppConstants.instance.baserUrlForImage}${movies[index].backdropPath}",
+                  "${constants.baserUrlForImage}${movies[index].backdropPath}",
                 ),
               ),
             ),
@@ -45,7 +45,7 @@ class TopRatedMovieCard extends StatelessWidget {
               height: 4.h,
               width: 30.w,
               decoration: BoxDecoration(
-                color: AppConstants.instance.dodgerBlue.withOpacity(.5),
+                color: constants.dodgerBlue.withOpacity(.5),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Center(

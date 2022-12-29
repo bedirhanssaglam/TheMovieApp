@@ -4,12 +4,12 @@ import 'package:the_movie/src/core/base/models/paginated_list_response.dart';
 import 'package:the_movie/src/core/base/services/interface_movie_service.dart';
 import 'package:vexana/vexana.dart';
 
-import '../../../core/constants/app/app_constants.dart';
 import '../../../core/constants/enums/network_enums.dart';
 import '../models/base_genres_model.dart';
 import '../models/genres_model.dart';
+import '../singleton/base_singleton.dart';
 
-class MovieService extends IMovieService {
+class MovieService extends IMovieService with BaseSingleton {
   MovieService(super.networkManager);
 
   @override
@@ -18,7 +18,7 @@ class MovieService extends IMovieService {
       NetworkEnums.genres.endpointName,
       parseModel: BaseGenresModel(parseModel: GenresModel()),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data.genres;
   }
@@ -31,7 +31,7 @@ class MovieService extends IMovieService {
         parseModel: MovieStarModel(),
       ),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data.results;
   }
@@ -44,7 +44,7 @@ class MovieService extends IMovieService {
         parseModel: MovieModel(),
       ),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data.results;
   }
@@ -57,7 +57,7 @@ class MovieService extends IMovieService {
         parseModel: MovieModel(),
       ),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data.results;
   }
@@ -70,7 +70,7 @@ class MovieService extends IMovieService {
         parseModel: MovieModel(),
       ),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data.results;
   }
@@ -81,7 +81,7 @@ class MovieService extends IMovieService {
       "${NetworkEnums.movieDetails.endpointName}$id",
       parseModel: MovieModel(),
       method: RequestType.GET,
-      queryParameters: {"api_key": AppConstants.instance.apiKey},
+      queryParameters: {"api_key": constants.apiKey},
     );
     return response.data;
   }
@@ -95,7 +95,7 @@ class MovieService extends IMovieService {
       ),
       method: RequestType.GET,
       queryParameters: {
-        "api_key": AppConstants.instance.apiKey,
+        "api_key": constants.apiKey,
         "query": searchWord,
       },
     );

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../base/functions/base_functions.dart';
+import '../../base/singleton/base_singleton.dart';
 import '../../constants/enums/network_result_enums.dart';
 import '../utils/typedefs.dart';
 
@@ -12,7 +12,7 @@ abstract class INetworkChangeManager {
   void dispose();
 }
 
-class NetworkChangeManager extends INetworkChangeManager {
+class NetworkChangeManager extends INetworkChangeManager with BaseSingleton {
   late final Connectivity _connectivity;
   StreamSubscription<ConnectivityResult>? _subscription;
 
@@ -29,7 +29,7 @@ class NetworkChangeManager extends INetworkChangeManager {
   @override
   void handleNetworkChange(NetworkCallBack onChange) {
     _subscription = _connectivity.onConnectivityChanged.listen((event) {
-      logControl(event.toString());
+      functions.logControl(event.toString());
       onChange.call(checkConnectivityResult(event));
     });
   }

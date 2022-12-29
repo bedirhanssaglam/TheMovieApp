@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../constants/app/app_constants.dart';
+import '../../base/singleton/base_singleton.dart';
 import '../../init/utils/typedefs.dart';
 
-class TextFormFieldWidget extends StatelessWidget {
+class TextFormFieldWidget extends StatefulWidget {
   final String? hintText;
   final StringFunction onSaved;
   final TextInputType? textInputType;
@@ -28,26 +28,32 @@ class TextFormFieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
+}
+
+class _TextFormFieldWidgetState extends State<TextFormFieldWidget>
+    with BaseSingleton {
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textEditingController,
+      controller: widget.textEditingController,
       textAlignVertical: TextAlignVertical.center,
-      keyboardType: textInputType,
+      keyboardType: widget.textInputType,
       autofocus: true,
-      onFieldSubmitted: onSubmitted,
-      textInputAction: textInputAction,
+      onFieldSubmitted: widget.onSubmitted,
+      textInputAction: widget.textInputAction,
       style: context.textTheme.headline2?.copyWith(
         fontSize: 12.sp,
       ),
       decoration: InputDecoration(
-        hintText: hintText,
-        suffixIcon: suffixIcon,
+        hintText: widget.hintText,
+        suffixIcon: widget.suffixIcon,
         filled: true,
-        fillColor: AppConstants.instance.outerSpace,
-        hoverColor: AppConstants.instance.dodgerBlue,
+        fillColor: constants.outerSpace,
+        hoverColor: constants.dodgerBlue,
         contentPadding: EdgeInsets.all(8.sp),
         hintStyle: context.textTheme.subtitle2?.copyWith(
-          color: AppConstants.instance.gray,
+          color: constants.gray,
           fontSize: 12.sp,
         ),
         border: const OutlineInputBorder(
@@ -64,7 +70,7 @@ class TextFormFieldWidget extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: AppConstants.instance.carnation),
+          borderSide: BorderSide(color: constants.carnation),
         ),
         disabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -72,9 +78,9 @@ class TextFormFieldWidget extends StatelessWidget {
         ),
       ),
       onSaved: (value) {
-        onSaved != null ? onSaved!(value) : null;
+        widget.onSaved != null ? widget.onSaved!(value) : null;
       },
-      validator: validator,
+      validator: widget.validator,
     );
   }
 }

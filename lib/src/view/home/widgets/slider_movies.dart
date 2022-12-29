@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/models/movie_model.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
-import 'package:the_movie/src/core/init/network/vexana_manager.dart';
 import 'package:the_movie/src/view/home/widgets/slider_movie_card.dart';
 
 import '../../../core/base/cubit/movie_cubit.dart';
-import '../../../core/constants/app/app_constants.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 
 class SliderMovies extends StatefulWidget {
   final double width;
@@ -27,14 +25,13 @@ class SliderMovies extends StatefulWidget {
   State<SliderMovies> createState() => _SliderMoviesState();
 }
 
-class _SliderMoviesState extends State<SliderMovies> {
+class _SliderMoviesState extends State<SliderMovies> with BaseSingleton {
   late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit =
-        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit = MovieCubit(MovieService(vexana.networkManager));
     movieCubit.fetchAllTopRatedMovies();
   }
 
@@ -44,14 +41,14 @@ class _SliderMoviesState extends State<SliderMovies> {
       bloc: movieCubit,
       builder: (context, state) {
         if (state is TopRatedMoviesLoading) {
-          return platformIndicator();
+          return functions.platformIndicator();
         } else if (state is TopRatedMoviesLoaded) {
           List<MovieModel> movies = state.movies;
           return _buildTopRatedSlider(movies);
         } else if (state is TopRatedMoviesError) {
-          return errorText(state.errorMessage);
+          return functions.errorText(state.errorMessage);
         } else {
-          return errorText("Something went wrong!");
+          return functions.errorText("Something went wrong!");
         }
       },
     );
@@ -71,7 +68,7 @@ class _SliderMoviesState extends State<SliderMovies> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
-                  "${AppConstants.instance.baserUrlForImage}${movies[index].backdropPath}",
+                  "${constants.baserUrlForImage}${movies[index].backdropPath}",
                 ),
                 fit: BoxFit.cover,
               ),

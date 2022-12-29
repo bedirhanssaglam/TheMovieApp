@@ -53,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar>
                       color: AppConstants.instance.grey,
                     ),
                   )
-                : platformBackButton(
+                : BaseFunctions.instance.platformBackButton(
                     onPressed: () => context.go(RouteEnums.home.routeName),
                   ),
             centerTitle: true,

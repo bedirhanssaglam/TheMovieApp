@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:the_movie/src/core/constants/app/app_constants.dart';
 import 'package:the_movie/src/view/home/widgets/indicator.dart';
+
+import '../../../core/base/singleton/base_singleton.dart';
 
 class SliderMovieCard extends StatefulWidget {
   const SliderMovieCard({
@@ -29,7 +30,7 @@ class SliderMovieCard extends StatefulWidget {
   SliderMovieCardState createState() => SliderMovieCardState();
 }
 
-class SliderMovieCardState extends State<SliderMovieCard> {
+class SliderMovieCardState extends State<SliderMovieCard> with BaseSingleton {
   late final ValueNotifier<int> _currentPageNotifier;
   late final PageController _pageController;
   Timer? _timer;
@@ -131,8 +132,8 @@ class SliderMovieCardState extends State<SliderMovieCard> {
                 return Indicator(
                   count: widget.children.length,
                   currentIndex: value % widget.children.length,
-                  activeColor: AppConstants.instance.dodgerBlue,
-                  backgroundColor: AppConstants.instance.grey,
+                  activeColor: constants.dodgerBlue,
+                  backgroundColor: constants.grey,
                   radius: 3,
                 );
               },

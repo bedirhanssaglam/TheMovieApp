@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/components/snackbar/snackbar_widget.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
 
 import '../../../core/base/models/movie_model.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 import '../../../core/components/button/button_widget.dart';
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
 
-class DetailDescriptionWidget extends StatelessWidget {
+class DetailDescriptionWidget extends StatelessWidget with BaseSingleton {
   const DetailDescriptionWidget({
     Key? key,
     required this.movie,
@@ -38,17 +37,17 @@ class DetailDescriptionWidget extends StatelessWidget {
               CustomText(
                 "Overview",
                 textStyle: context.textTheme.headline1?.copyWith(
-                  color: AppConstants.instance.malibu,
+                  color: constants.malibu,
                 ),
               ),
               3.h.ph,
               CustomText(
-                toShortString(
+                functions.toShortString(
                   "${movie.overview}",
                   countCharacter: 330,
                 ),
                 textStyle: context.textTheme.headline1?.copyWith(
-                  color: AppConstants.instance.outerSpace,
+                  color: constants.outerSpace,
                 ),
               ),
               5.h.ph,
@@ -81,14 +80,14 @@ class DetailDescriptionWidget extends StatelessWidget {
       curve: Curves.easeInOut,
       percent: ("${movie.voteAverage}").parseDouble / 10,
       circularStrokeCap: CircularStrokeCap.round,
-      progressColor: AppConstants.instance.dodgerBlue,
+      progressColor: constants.dodgerBlue,
       arcType: ArcType.FULL,
       center: CustomText(
-        toShortDoubleNumber(
+        functions.toShortDoubleNumber(
           ("${movie.voteAverage}").parseDouble,
         ),
         textStyle: context.textTheme.headline1?.copyWith(
-          color: AppConstants.instance.outerSpace,
+          color: constants.outerSpace,
         ),
       ),
     );

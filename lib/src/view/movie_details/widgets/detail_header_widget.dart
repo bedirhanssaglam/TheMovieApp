@@ -4,10 +4,10 @@ import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 
 import '../../../core/base/models/movie_model.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
 
-class DetailHeaderWidget extends StatelessWidget {
+class DetailHeaderWidget extends StatelessWidget with BaseSingleton {
   const DetailHeaderWidget({
     Key? key,
     required this.movie,
@@ -40,7 +40,7 @@ class DetailHeaderWidget extends StatelessWidget {
                 CustomText(
                   "${movie.title}",
                   textStyle: context.textTheme.headline2?.copyWith(
-                    color: AppConstants.instance.mineShaft,
+                    color: constants.mineShaft,
                   ),
                 ),
                 3.h.ph,
@@ -49,7 +49,7 @@ class DetailHeaderWidget extends StatelessWidget {
                   width: 80.w,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      color: AppConstants.instance.dodgerBlue.withOpacity(.2)),
+                      color: constants.dodgerBlue.withOpacity(.2)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -57,14 +57,14 @@ class DetailHeaderWidget extends StatelessWidget {
                         "Release Date: ${movie.releaseDate}",
                         textStyle: context.textTheme.headline1?.copyWith(
                           fontSize: 10.sp,
-                          color: AppConstants.instance.outerSpace,
+                          color: constants.outerSpace,
                         ),
                       ),
                       CustomText(
                         "Popularity: ${movie.popularity}",
                         textStyle: context.textTheme.headline1?.copyWith(
                           fontSize: 10.sp,
-                          color: AppConstants.instance.outerSpace,
+                          color: constants.outerSpace,
                         ),
                       ),
                     ],
@@ -88,7 +88,7 @@ class DetailHeaderWidget extends StatelessWidget {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              "${AppConstants.instance.baserUrlForImage}${movie.backdropPath}",
+              "${constants.baserUrlForImage}${movie.backdropPath}",
             ),
           ),
         ),

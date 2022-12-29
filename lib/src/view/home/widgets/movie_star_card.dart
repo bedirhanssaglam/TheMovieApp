@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
-import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
-import 'package:the_movie/src/core/init/network/vexana_manager.dart';
 
 import '../../../core/base/cubit/movie_cubit.dart';
 import '../../../core/base/models/movie_star_model.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
 
 class MovieStarCard extends StatefulWidget {
   const MovieStarCard({
@@ -21,14 +19,13 @@ class MovieStarCard extends StatefulWidget {
   State<MovieStarCard> createState() => _MovieStarCardState();
 }
 
-class _MovieStarCardState extends State<MovieStarCard> {
+class _MovieStarCardState extends State<MovieStarCard> with BaseSingleton {
   late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit =
-        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit = MovieCubit(MovieService(vexana.networkManager));
     movieCubit.fetchAllMoviStars();
   }
 
@@ -38,14 +35,14 @@ class _MovieStarCardState extends State<MovieStarCard> {
       bloc: movieCubit,
       builder: (context, state) {
         if (state is MovieStarsLoading) {
-          return platformIndicator();
+          return functions.platformIndicator();
         } else if (state is MovieStarsLoaded) {
           List<MovieStarModel> movieStars = state.movieStars;
           return _buildMovieStarsList(movieStars);
         } else if (state is MovieStarsError) {
-          return errorText(state.errorMessage);
+          return functions.errorText(state.errorMessage);
         } else {
-          return errorText("Something went wrong!");
+          return functions.errorText("Something went wrong!");
         }
       },
     );
@@ -65,9 +62,9 @@ class _MovieStarCardState extends State<MovieStarCard> {
               children: [
                 CircleAvatar(
                   radius: 8.h,
-                  backgroundColor: AppConstants.instance.outerSpace,
+                  backgroundColor: constants.outerSpace,
                   backgroundImage: NetworkImage(
-                    "${AppConstants.instance.baserUrlForImage}${movieStars[index].profilePath}",
+                    "${constants.baserUrlForImage}${movieStars[index].profilePath}",
                   ),
                 ),
                 1.h.ph,

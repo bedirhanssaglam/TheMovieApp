@@ -8,13 +8,13 @@ import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
 import 'package:the_movie/src/view/intro/widgets/intro_header_widget.dart';
 
+import '../../core/base/singleton/base_singleton.dart';
 import '../../core/components/text/custom_text.dart';
-import '../../core/constants/app/app_constants.dart';
 import '../../core/constants/enums/icon_enums.dart';
 import '../../core/constants/enums/route_enums.dart';
 import 'riverpod/current_page_riverpod.dart';
 
-class IntroView extends ConsumerWidget {
+class IntroView extends ConsumerWidget with BaseSingleton {
   IntroView({super.key});
 
   final PageController pageController = PageController(initialPage: 0);
@@ -47,10 +47,10 @@ class IntroView extends ConsumerWidget {
         onPageChanged: (value) {
           ref.read(currentPageRiverpod.notifier).state = value;
         },
-        itemCount: AppConstants.instance.splashData.length,
+        itemCount: constants.splashData.length,
         itemBuilder: (context, index) => IntroHeaderWidget(
-          image: AppConstants.instance.splashData[index]["image"]!,
-          text: AppConstants.instance.splashData[index]['text']!,
+          image: constants.splashData[index]["image"]!,
+          text: constants.splashData[index]['text']!,
         ),
       ),
     );
@@ -66,7 +66,7 @@ class IntroView extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  AppConstants.instance.splashData.length,
+                  constants.splashData.length,
                   (index) {
                     return AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
@@ -76,8 +76,8 @@ class IntroView extends ConsumerWidget {
                           ref.watch(currentPageRiverpod) == index ? 6.w : 2.5.w,
                       decoration: BoxDecoration(
                         color: ref.watch(currentPageRiverpod) == index
-                            ? AppConstants.instance.malibu
-                            : AppConstants.instance.shark,
+                            ? constants.malibu
+                            : constants.shark,
                         borderRadius: BorderRadius.circular(3),
                       ),
                     );
@@ -101,14 +101,14 @@ class IntroView extends ConsumerWidget {
           CustomText(
             "Skip",
             textStyle: context.textTheme.headline1?.copyWith(
-              color: AppConstants.instance.malibu,
+              color: constants.malibu,
               fontWeight: FontWeight.w500,
             ),
           ),
           SvgPicture.asset(
             IconEnums.arrowForward.iconName.toSvg,
             height: 18.sp,
-            color: AppConstants.instance.malibu,
+            color: constants.malibu,
           ),
         ],
       ),

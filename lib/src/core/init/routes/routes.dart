@@ -36,7 +36,7 @@ class Routes {
       GoRoute(
         path: RouteEnums.splash.routeName,
         pageBuilder: (context, state) {
-          return animatedRouting(
+          return BaseFunctions.instance.animatedRouting(
             state: state,
             route: const SplashView(),
           );
@@ -45,7 +45,7 @@ class Routes {
       GoRoute(
         path: RouteEnums.intro.routeName,
         pageBuilder: (context, state) {
-          return animatedRouting(
+          return BaseFunctions.instance.animatedRouting(
             state: state,
             route: IntroView(),
           );
@@ -54,7 +54,7 @@ class Routes {
       GoRoute(
         path: RouteEnums.movieDetails.routeName,
         pageBuilder: (context, state) {
-          return animatedRouting(
+          return BaseFunctions.instance.animatedRouting(
             state: state,
             route: MovieDetailsView(
               id: int.tryParse(state.params['id'] ?? "")!,
@@ -65,7 +65,7 @@ class Routes {
       GoRoute(
         path: RouteEnums.searchedMovies.routeName,
         pageBuilder: (context, state) {
-          return animatedRouting(
+          return BaseFunctions.instance.animatedRouting(
             state: state,
             route: SearchedMoviesView(
               searchWord: state.params['searchWord'] ?? "",
@@ -75,7 +75,8 @@ class Routes {
       ),
       ShellRoute(
         navigatorKey: mainNavigatorKey,
-        pageBuilder: (context, state, child) => animatedRouting(
+        pageBuilder: (context, state, child) =>
+            BaseFunctions.instance.animatedRouting(
           state: state,
           route: CustomScaffold(
             navigatorState: state,
@@ -86,7 +87,7 @@ class Routes {
           GoRoute(
             path: RouteEnums.home.routeName,
             pageBuilder: (context, state) {
-              return animatedRouting(
+              return BaseFunctions.instance.animatedRouting(
                 state: state,
                 route: const HomeView(),
               );
@@ -95,7 +96,7 @@ class Routes {
           GoRoute(
             path: RouteEnums.discover.routeName,
             pageBuilder: (context, state) {
-              return animatedRouting(
+              return BaseFunctions.instance.animatedRouting(
                 state: state,
                 route: const DiscoverView(),
               );
@@ -104,7 +105,7 @@ class Routes {
           GoRoute(
             path: RouteEnums.topRated.routeName,
             pageBuilder: (context, state) {
-              return animatedRouting(
+              return BaseFunctions.instance.animatedRouting(
                 state: state,
                 route: const TopRatedView(),
               );
@@ -113,7 +114,7 @@ class Routes {
           GoRoute(
             path: RouteEnums.nowPlayingMovies.routeName,
             pageBuilder: (context, state) {
-              return animatedRouting(
+              return BaseFunctions.instance.animatedRouting(
                 state: state,
                 route: const NowPlayingMoviesView(),
               );

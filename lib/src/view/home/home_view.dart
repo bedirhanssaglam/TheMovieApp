@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
-import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
-import 'package:the_movie/src/core/init/network/vexana_manager.dart';
 
 import '../../core/base/models/genres_model.dart';
-import '../../core/constants/app/app_constants.dart';
+import '../../core/base/singleton/base_singleton.dart';
 import 'widgets/banner_title.dart';
 import 'widgets/circular_categories.dart';
 import 'widgets/movie_star_card.dart';
@@ -21,14 +19,13 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with BaseSingleton {
   late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit =
-        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit = MovieCubit(MovieService(vexana.networkManager));
     movieCubit.fetchAllGenres();
   }
 
@@ -46,14 +43,14 @@ class _HomeViewState extends State<HomeView> {
                 bloc: movieCubit,
                 builder: (context, state) {
                   if (state is GenresLoading) {
-                    return platformIndicator();
+                    return functions.platformIndicator();
                   } else if (state is GenresLoaded) {
                     final List<GenresModel> genres = state.genres;
                     return _buildGenresList(genres);
                   } else if (state is GenresError) {
-                    return errorText(state.errorMessage);
+                    return functions.errorText(state.errorMessage);
                   } else {
-                    return errorText("Something went wrong!");
+                    return functions.errorText("Something went wrong!");
                   }
                 },
               ),
@@ -63,8 +60,8 @@ class _HomeViewState extends State<HomeView> {
               BannerTitle(
                 firstText: "Trend ",
                 secondText: "Movie Stars",
-                firstTextColor: AppConstants.instance.dodgerBlue,
-                secondTextColor: AppConstants.instance.malibu,
+                firstTextColor: constants.dodgerBlue,
+                secondTextColor: constants.malibu,
               ),
               4.h.ph,
               const MovieStarCard(),
@@ -86,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
         itemBuilder: (context, index) {
           return CircularCategories(
             image:
-                "${AppConstants.instance.baserUrlForImage}/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+                "${constants.baserUrlForImage}/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
             text: "${genres[index].name}",
           );
         },

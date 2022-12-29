@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kartal/kartal.dart';
 
-import '../../constants/app/app_constants.dart';
+import '../../base/singleton/base_singleton.dart';
 import '../../constants/enums/route_enums.dart';
 import '../appbar/custom_app_bar.dart';
 
@@ -20,7 +20,7 @@ class CustomScaffold extends StatefulWidget {
   State<CustomScaffold> createState() => _CustomScaffoldState();
 }
 
-class _CustomScaffoldState extends State<CustomScaffold> {
+class _CustomScaffoldState extends State<CustomScaffold> with BaseSingleton {
   int? get currentTabIndex => _getSelectedTabIndex();
 
   List<String> tabsRouteLocations = [
@@ -70,14 +70,14 @@ class _CustomScaffoldState extends State<CustomScaffold> {
 
   BottomNavigationBar bottomNavBar() {
     return BottomNavigationBar(
-      backgroundColor: AppConstants.instance.shark,
+      backgroundColor: constants.shark,
       type: BottomNavigationBarType.fixed,
       enableFeedback: true,
       showUnselectedLabels: false,
       showSelectedLabels: true,
-      selectedItemColor: AppConstants.instance.dodgerBlue,
+      selectedItemColor: constants.dodgerBlue,
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      unselectedItemColor: AppConstants.instance.grey,
+      unselectedItemColor: constants.grey,
       currentIndex: currentTabIndex ?? 0,
       onTap: (index) {
         _onItemTapped(index);

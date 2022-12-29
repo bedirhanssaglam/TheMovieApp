@@ -5,11 +5,10 @@ import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
-import '../../base/functions/base_functions.dart';
 import '../../base/models/movie_model.dart';
+import '../../base/singleton/base_singleton.dart';
 
-class MovieListTile extends StatelessWidget {
+class MovieListTile extends StatelessWidget with BaseSingleton {
   const MovieListTile({
     Key? key,
     required this.movies,
@@ -31,7 +30,7 @@ class MovieListTile extends StatelessWidget {
           height: 15.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppConstants.instance.shark,
+            color: constants.shark,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             boxShadow: const [
               BoxShadow(
@@ -62,7 +61,7 @@ class MovieListTile extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(
-            "${AppConstants.instance.baserUrlForImage}${movies[index].backdropPath}",
+            "${constants.baserUrlForImage}${movies[index].backdropPath}",
           ),
         ),
       ),
@@ -75,7 +74,7 @@ class MovieListTile extends StatelessWidget {
       children: [
         1.h.ph,
         CustomText(
-          toShortString("${movies[index].title}"),
+          functions.toShortString("${movies[index].title}"),
           textStyle: context.textTheme.headline2,
         ),
         1.h.ph,

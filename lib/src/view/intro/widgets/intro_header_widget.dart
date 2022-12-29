@@ -3,10 +3,10 @@ import 'package:kartal/kartal.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/core/extensions/string_extensions.dart';
+import '../../../core/base/singleton/base_singleton.dart';
 import '../../../core/components/text/custom_text.dart';
-import '../../../core/constants/app/app_constants.dart';
 
-class IntroHeaderWidget extends StatelessWidget {
+class IntroHeaderWidget extends StatelessWidget with BaseSingleton {
   const IntroHeaderWidget({
     Key? key,
     required this.text,
@@ -26,7 +26,7 @@ class IntroHeaderWidget extends StatelessWidget {
         ),
         5.h.ph,
         CustomText(
-          AppConstants.instance.appName,
+          constants.appName,
           textStyle: context.textTheme.headline2,
         ),
         5.h.ph,

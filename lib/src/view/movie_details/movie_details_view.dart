@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
-import 'package:the_movie/src/core/base/functions/base_functions.dart';
 import 'package:the_movie/src/core/base/models/movie_model.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/components/appbar/custom_app_bar.dart';
 
-import 'package:the_movie/src/core/init/network/vexana_manager.dart';
+import '../../core/base/singleton/base_singleton.dart';
 import 'widgets/detail_description_widget.dart';
 import 'widgets/detail_header_widget.dart';
 
@@ -22,14 +21,14 @@ class MovieDetailsView extends StatefulWidget {
   State<MovieDetailsView> createState() => _MovieDetailsViewState();
 }
 
-class _MovieDetailsViewState extends State<MovieDetailsView> {
+class _MovieDetailsViewState extends State<MovieDetailsView>
+    with BaseSingleton {
   late MovieCubit movieCubit;
 
   @override
   void initState() {
     super.initState();
-    movieCubit =
-        MovieCubit(MovieService(VexanaManager.instance.networkManager));
+    movieCubit = MovieCubit(MovieService(vexana.networkManager));
     movieCubit.fetchMovieDetailsById(widget.id);
   }
 
@@ -44,7 +43,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           bloc: movieCubit,
           builder: (context, state) {
             if (state is FetchMovieDetailsLoading) {
-              return platformIndicator();
+              return functions.platformIndicator();
             } else if (state is FetchMovieDetailsLoaded) {
               final MovieModel movie = state.movie;
               return Column(
@@ -54,9 +53,9 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                 ],
               );
             } else if (state is FetchMovieDetailsError) {
-              return errorText(state.errorMessage);
+              return functions.errorText(state.errorMessage);
             } else {
-              return errorText("Something went wrong!");
+              return functions.errorText("Something went wrong!");
             }
           },
         ),
