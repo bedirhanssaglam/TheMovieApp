@@ -7,6 +7,7 @@ import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import '../../../core/components/text/custom_text.dart';
 import '../../base/models/movie_model.dart';
 import '../../base/singleton/base_singleton.dart';
+import '../animations/animationUtils/animate_in_effect.dart';
 
 class MovieListTile extends StatelessWidget with BaseSingleton {
   const MovieListTile({
@@ -68,28 +69,31 @@ class MovieListTile extends StatelessWidget with BaseSingleton {
     );
   }
 
-  Column _buildMovieDetails(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        1.h.ph,
-        CustomText(
-          functions.toShortString("${movies[index].title}"),
-          textStyle: context.textTheme.headline2,
-        ),
-        1.h.ph,
-        CustomText(
-          "Average: ${movies[index].voteAverage}",
-        ),
-        1.h.ph,
-        CustomText(
-          "Vote Count : ${movies[index].voteCount}",
-        ),
-        1.h.ph,
-        CustomText(
-          "Original Language: ${movies[index].originalLanguage}",
-        ),
-      ],
+  Widget _buildMovieDetails(BuildContext context) {
+    return AnimateInEffect(
+      keepAlive: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          1.h.ph,
+          CustomText(
+            functions.toShortString("${movies[index].title}"),
+            textStyle: context.textTheme.headline2,
+          ),
+          1.h.ph,
+          CustomText(
+            "Average: ${movies[index].voteAverage}",
+          ),
+          1.h.ph,
+          CustomText(
+            "Vote Count : ${movies[index].voteCount}",
+          ),
+          1.h.ph,
+          CustomText(
+            "Original Language: ${movies[index].originalLanguage}",
+          ),
+        ],
+      ),
     );
   }
 }

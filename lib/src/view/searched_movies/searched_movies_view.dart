@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
+import 'package:the_movie/src/view/searched_movies/widgets/animated_list_view.dart';
 import 'package:the_movie/src/core/components/appbar/custom_app_bar.dart';
-import 'package:the_movie/src/core/components/movie_list_tile/movie_list_tile.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
 import 'package:the_movie/src/view/searched_movies/widgets/animated_rich_text.dart.dart';
 
@@ -60,16 +60,8 @@ class _SearchedMoviesViewState extends State<SearchedMoviesView>
                     return functions.platformIndicator();
                   } else if (state is FetchSearchedMovieLoaded) {
                     final List<MovieModel> movies = state.movies;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.movies.length,
-                      itemBuilder: (context, index) {
-                        return MovieListTile(
-                          movies: movies,
-                          index: index,
-                        );
-                      },
+                    return AnimatedMovieListView(
+                      movies: movies,
                     );
                   } else if (state is FetchSearchedMovieError) {
                     return functions.errorText(state.errorMessage);

@@ -4,11 +4,12 @@ import 'package:sizer/sizer.dart';
 import 'package:the_movie/src/core/base/cubit/movie_cubit.dart';
 import 'package:the_movie/src/core/base/services/movie_service.dart';
 import 'package:the_movie/src/core/extensions/num_extensions.dart';
+import 'package:the_movie/src/view/home/widgets/animated_horizontal_list.dart';
 
 import '../../core/base/models/genres_model.dart';
 import '../../core/base/singleton/base_singleton.dart';
+import '../../core/components/animations/animationUtils/fade_in_effect.dart';
 import 'widgets/banner_title.dart';
-import 'widgets/circular_categories.dart';
 import 'widgets/movie_star_card.dart';
 import 'widgets/slider_movies.dart';
 
@@ -46,7 +47,7 @@ class _HomeViewState extends State<HomeView> with BaseSingleton {
                     return functions.platformIndicator();
                   } else if (state is GenresLoaded) {
                     final List<GenresModel> genres = state.genres;
-                    return _buildGenresList(genres);
+                    return AnimatedGenresList(genres: genres);
                   } else if (state is GenresError) {
                     return functions.errorText(state.errorMessage);
                   } else {
@@ -57,36 +58,19 @@ class _HomeViewState extends State<HomeView> with BaseSingleton {
               3.h.ph,
               const SliderMovies(),
               5.h.ph,
-              BannerTitle(
-                firstText: "Trend ",
-                secondText: "Movie Stars",
-                firstTextColor: constants.dodgerBlue,
-                secondTextColor: constants.malibu,
+              FadeInEffect(
+                child: BannerTitle(
+                  firstText: "Trend ",
+                  secondText: "Movie Stars",
+                  firstTextColor: constants.dodgerBlue,
+                  secondTextColor: constants.malibu,
+                ),
               ),
               4.h.ph,
               const MovieStarCard(),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  SizedBox _buildGenresList(List<GenresModel> genres) {
-    return SizedBox(
-      height: 16.h,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        padding: EdgeInsets.only(right: 2.w),
-        itemBuilder: (context, index) {
-          return CircularCategories(
-            image:
-                "${constants.baserUrlForImage}/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
-            text: "${genres[index].name}",
-          );
-        },
       ),
     );
   }
