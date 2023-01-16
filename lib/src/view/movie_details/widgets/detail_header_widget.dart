@@ -46,7 +46,7 @@ class DetailHeaderWidget extends StatelessWidget with BaseSingleton {
                 3.h.ph,
                 Container(
                   height: 5.h,
-                  width: 80.w,
+                  width: 90.w,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
                       color: constants.dodgerBlue.withOpacity(.2)),
