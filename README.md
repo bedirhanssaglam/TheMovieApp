@@ -1,4 +1,4 @@
-# The Movie
+# The Movie App
 
 Millions of movies, TV shows and people to discover. Explore now!
 
